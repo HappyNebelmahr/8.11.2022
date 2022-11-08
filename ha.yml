@@ -11,4 +11,22 @@ tasks:
         autoupdateminute: "5"
         command: sudo apt update
         user: root
+    - name: Creates a cron file under /etc/cron.d
+      ansible.builtin.cron:
+        autoupdateminute: "5"
+        command: echo date >> /tmp/datetime.txt  
+        user: root
+    - name: Start service  ufw, if not started
+      ansible.builtin.service:
+        name:  ufw
+        state: started
 
+    - name: Stop service  ufw, if started
+      ansible.builtin.service:
+       name:  ufw
+       state: stopped
+
+    - name: Restart service  ufw, in all cases
+      ansible.builtin.service:
+        name:  ufw
+        state: restarted
