@@ -1,0 +1,14 @@
+hosts: all
+remote_user: 'azureuser'
+
+vars:
+     ansible_user: 'azureuser'
+     ansible_ssh_private_key_file: 'C:\Users\Admin\Downloads\vm5_key.pem'
+tasks:
+
+    - name: Creates a cron file under /etc/cron.d
+      ansible.builtin.cron:
+        autoupdateminute: "5"
+        command: sudo apt update
+        user: root
+
